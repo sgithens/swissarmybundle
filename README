@@ -1,58 +1,20 @@
-Using it:
+This is a prototype for doing server side rendering in Javascript (using trimpath, but it 
+would be easy to use anything else.
 
-  * Run Nakamura with the extra JVM switch:
+This is actually a fork of swiss army bundle, although I've removed all the swissarmy source,
+but it was an easy project to spring board off of.
 
-      -Dorg.apache.sling.launcher.system.packages=,sun.misc
+There are really only 2 source files, one which is the java servlet, and the other which is the
+javascript.  Plus a couple files which are trimpath templates.
 
-  * Then:
+Build Instructions:
+1. mvn clean install -Predeploy
+2. Mount /dev with a FS Resource as you normally would when doing UX development.
+3. cp -R ./rhino /whereever/your/3akai-ux/stuff/is/dev/  # so it needs to be /dev/rhino
 
-     $ cd nakamura/bundles
-     $ git clone [swissarmybundle.git url]
-     $ cd swissarmybundle
-     $ mvn -P redeploy clean install
-  
-  * Wait hours for Maven.  The bundle should eventually load
+Try out the following:
+http://localhost:8080/system/swissrender?t=/dev/simple
+http://localhost:8080/system/swissrender?t=/dev/basicuser
+http://localhost:8080/system/swissrender?t=/me
 
-From here, there are a couple of ways of getting a REPL.  The
-simplest:
-
-   $ curl http://localhost:8080/system/swissarmy/python
-
-or
-
-   $ curl http://localhost:8080/system/swissarmy/ruby
-
-or
-
-   $ curl http://localhost:8080/system/swissarmy/clojure
-
-will open a socket listening on a port (shown in the Nakamura
-console).  From here, you can just:
-
-  # For Python or Ruby
-  $ telnet localhost 4010
-
-or
-
-  # For Clojure
-  M-x slime-connect RET localhost RET 4010
-
-
-You can also provide a selector to get a REPL running in the context
-of a request for a particular resource:
-
-  $ curl -s http://localhost:8080/~mark/public/authprofile.python.json
-
-  $ curl -s http://localhost:8080/~mark/public/authprofile.ruby.json
-
-  $ curl -s http://localhost:8080/~mark/public/authprofile.clojure.json
-
-and then connect using the commands above.
-
-Here's a quick screenshot of running a Python repl:
-
-  http://dishevelled.net/nakamura-jython.png
-
-WARNING: This opens a security hole the size of... a large security
-hole, so be careful where you run this.
-
+~steve

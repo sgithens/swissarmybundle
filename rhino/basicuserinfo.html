@@ -1,0 +1,13 @@
+<html>
+<body>
+<h1>${username}</h1>
+<h2>Below are the keys for a basic profile element:</h2>
+<ul>
+{for item in items}
+<li>${item.key} : ${item.value}</li>
+{/for}
+</ul>
+<h2>Below is a dump of the user props</h2>
+<p>${userdump}</p>
+</body>
+</html>
